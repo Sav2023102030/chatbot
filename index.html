@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversión de Texto a Voz</title>
+</head>
+<body>
+    <h1>Conversión de Texto a Voz</h1>
+    <form id="textForm">
+        <label for="texto">Ingrese el texto que desea que se hable:</label>
+        <br>
+        <textarea id="texto" name="texto" rows="4" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Convertir a Voz">
+    </form>
+
+    <script>
+        document.getElementById('textForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const text = document.getElementById('texto').value;
+            textToSpeech(text);
+            if (text.toLowerCase().includes("investigacion")) {
+                const additionalText = `Tipos de investigación
+                1. Investigación etnográfica:
+                2. Investigación cualitativa:
+                3. Investigación evaluativa:
+                4. Investigación de mercado:
+                5. Investigación comparada:
+                6. Investigación participativa:
+                7. Investigación ex post facto sobre hechos cumplidos (post facto):
+                8. Estudio de caso:
+                9. Investigación correlacional:
+                10. Investigación experimental:
+                11. Investigación descriptiva:
+                12. Investigación histórica:`;
+                textToSpeech(additionalText);
+            }
+        });
+
+        function textToSpeech(text) {
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.rate = 1; // Velocidad de habla, 1 es la normal
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
